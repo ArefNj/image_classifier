@@ -6,11 +6,8 @@
             "command": "C:\\MinGW\\bin\\g++.exe",
             "args": [
                 "-fdiagnostics-color=always",
-                "-std=c++20",
                 "-g",
-                "main.cpp",
-                "utils\\utils.cpp",
-                "utils\\timer.cpp",
+                "${file}",
                 "-o",
                 "${fileDirname}\\${fileBasenameNoExtension}.exe"
             ],
