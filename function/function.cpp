@@ -24,7 +24,7 @@ void destance_matrix_from_patern(float matrix[][100], float pattern[], float sto
     }
 }
 
-// storage the mean feature in even indexes in feature array
+// storage the mean feature in even indexes in feature array [even indexes]
 void mean(float matrix[28][28], float feature[32])
 {
     float sum;
@@ -54,7 +54,7 @@ void mean(float matrix[28][28], float feature[32])
     }
 }
 
-// storage the std feature in feature array (need calculate mean first)
+// storage the std feature in feature array (need calculate mean first)[odd indexes]
 void std(float matrix[28][28], float feature[32])
 {
     float sum;
