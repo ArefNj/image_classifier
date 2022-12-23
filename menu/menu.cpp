@@ -1,15 +1,15 @@
 #include "menu.hpp"
 
-int main()
-{
-    // CLEAR TERMINAL
-    clear_screen();
+// int main()
+// {
+//     // CLEAR TERMINAL
+//     clear_screen();
 
-    // GO TO START MENU
-    start_menu();
+//     // GO TO START MENU
+//     start_menu();
 
-    return 0;
-}
+//     return 0;
+// }
 
 void start_menu()
 {
@@ -50,18 +50,18 @@ void start_menu()
              << " \tPooria Azami\n"
              << " \tAhmadreza Kazemi\n"
              << " \tMohsen Gholami \n\n";
-             // Info...
+        // Info...
 
         system("PAUSE");
         clear_screen();
-        main();
+        start_menu();
 
         break;
 
     case 3: // IF SWITCH KEY == 3 : EXIT THE APP
         clear_screen();
         system("color 0E");
-        
+
         cout << "Tnx for your attention ^.^\n\n";
 
         system("PAUSE");
@@ -70,7 +70,7 @@ void start_menu()
 
         break;
 
-    default:    // IF SWITCH KEY != 1,2,3 : ASK TO INPUT SWITCH KEY CORRECTLY
+    default: // IF SWITCH KEY != 1,2,3 : ASK TO INPUT SWITCH KEY CORRECTLY
         clear_screen();
         system("color 0E");
 
@@ -95,7 +95,7 @@ void main_menu()
          << " 4.Back to Start menu\n\n"
          << "-->  ";
 
-    // INIT SWITCH KEY 
+    // INIT SWITCH KEY
     int switch_key;
     cin >> switch_key;
 
@@ -149,7 +149,7 @@ void main_menu()
 
         break;
 
-    default:  // IF SWITCH KEY != 1,2,3 : ASK TO INPUT SWITCH KEY CORRECTLY
+    default: // IF SWITCH KEY != 1,2,3 : ASK TO INPUT SWITCH KEY CORRECTLY
         clear_screen();
         system("color 0E");
 

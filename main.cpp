@@ -1,6 +1,7 @@
 #include "utils\\utils.hpp"
 #include "utils\\timer.hpp"
 #include "function\\function.hpp"
+#include "menu\\menu.hpp"
 
 int main()
 {
@@ -15,7 +16,7 @@ int main()
     {
         for (int j = 0; j < IMAGE_SIZE; j++)
         {
-            std::cout << img[i][j] << "\t";
+            std::cout << img[i][j] << "   ";
         }
         std::cout << std::endl;
     }
