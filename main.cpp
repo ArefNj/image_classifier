@@ -1,5 +1,6 @@
 #include "utils\\utils.hpp"
 #include "utils\\timer.hpp"
+#include "function\\function.hpp"
 
 int main()
 {

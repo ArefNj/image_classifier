@@ -1,12 +1,4 @@
-#include <iostream>
-#include <cmath>
-
-using namespace std;
-
-int main()
-{
-    return 0;
-}
+#include "function.hpp"
 
 // measures of distance of two array by Euclidean distance
 float distance(float array1[], float array2[], int num_array)
@@ -58,6 +50,7 @@ void sd(float matrix[28][28], float feature[32])
         }
     }
 }
+
 // storage the mean feature in even indexes in feature array [even indexes]
 void mean(float matrix[28][28], float feature[32])
 {
