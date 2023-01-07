@@ -98,6 +98,7 @@ void main_menu()
 
     // INIT SWITCH KEY
     int switch_key;
+    int index = -1;
     cin >> switch_key;
     string explor_num = "-1";
 
@@ -116,8 +117,21 @@ void main_menu()
             cout << endl << endl;
         }
         clear_screen();
+        while (!(index > 0 && index <= 5000))
+        {
+
+        cout << "Please input the index of number " 
+             << explor_num 
+             << "between 1 and 5000"
+             << endl << endl
+             << "-->  ";
+             cin >> index;
+             cout << endl << endl;
+             clear_screen();
+        }
+
         system("color 0B");
-        explor(explor_num);
+        explor(explor_num, index);
 
         system("PAUSE");
         system("color 0F");
