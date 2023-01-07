@@ -9,6 +9,7 @@ struct PIC
 {
     int lable;
     float features[32];
+    float distance;
 };
 
 // measures of distance of two array by Euclidean distance
