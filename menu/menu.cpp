@@ -1,5 +1,7 @@
 #include "menu.hpp"
 #include "..\\function\\function.hpp"
+#include "..\\utils\\utils.hpp"
+#include "..\\utils\\timer.hpp"
 
 // int main()
 // {
@@ -99,14 +101,22 @@ void main_menu()
     // INIT SWITCH KEY
     int switch_key;
     cin >> switch_key;
+    string explor_num = "-1";
 
     switch (switch_key)
     {
     case 1: // IF SWITCH KEY == 1 : GO TO EXPLORING SECTION
+        
         clear_screen();
         system("color 0E");
-
-        cout << "Under Construction... [ ' _ ' ] \n\n";
+        while (stoi(explor_num) < 0 && stoi(explor_num) > 9)
+        {
+            cout << "Please choose your number between 0 and 9\n\n"
+                 << "-->  ";
+            cin >> explor_num;
+            cout << endl << endl;
+        }
+        explor(explor_num);
 
         system("PAUSE");
         system("color 0F");
