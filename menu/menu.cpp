@@ -1,7 +1,5 @@
 #include "menu.hpp"
 #include "..\\function\\function.hpp"
-#include "..\\utils\\utils.hpp"
-#include "..\\utils\\timer.hpp"
 
 // int main()
 // {
