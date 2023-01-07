@@ -12,6 +12,9 @@
 //     return 0;
 // }
 
+// pictures features
+PIC pictures[10000];
+
 void start_menu()
 {
     clear_screen();
@@ -101,6 +104,8 @@ void main_menu()
     int index = -1;
     cin >> switch_key;
     string explor_num = "-1";
+    string test_num = "-1";
+
 
     switch (switch_key)
     {
@@ -131,7 +136,7 @@ void main_menu()
         }
 
         system("color 0B");
-        explor(explor_num, index);
+        exploring(explor_num, index, "train");
 
         system("PAUSE");
         system("color 0F");
@@ -145,7 +150,10 @@ void main_menu()
         clear_screen();
         system("color 0E");
 
-        cout << "Under Construction... [ ' _ ' ] \n\n";
+        
+        cout << "Training...\n\n";
+        training(pictures);
+        
 
         system("PAUSE");
         system("color 0F");
@@ -158,9 +166,34 @@ void main_menu()
     case 3: // IF SWITCH KEY == 3 : GO TO TEST SECTION
         clear_screen();
         system("color 0E");
+        
+        // get test num
+        while (!(stoi(test_num) >= 0 && stoi(test_num) <= 9))
+        {
+            cout << "Please choose your number between 0 and 9\n\n"
+                 << "-->  ";
+            cin >> test_num;
+            cout << endl << endl;
+        }
+        clear_screen();
 
-        cout << "Under Construction... [ ' _ ' ] \n\n";
+        // get index
+        while (!(index > 0 && index <= 800))
+        {
 
+        cout << "Please input the index of number " 
+             << explor_num 
+             << "between 1 and 800"
+             << endl << endl
+             << "-->  ";
+             cin >> index;
+             cout << endl << endl;
+             clear_screen();
+        }
+
+        // testing
+        cout << testing(test_num, index, pictures);
+        
         system("PAUSE");
         system("color 0F");
         clear_screen();
@@ -190,12 +223,3 @@ void main_menu()
     }
 }
 
-void clear_screen()
-{
-#ifdef _WIN32
-    system("cls");
-#else
-    // Assume POSIX
-    system("clear");
-#endif
-}
