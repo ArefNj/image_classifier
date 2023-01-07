@@ -1,17 +1,6 @@
 #include "menu.hpp"
 #include "..\\function\\function.hpp"
 
-// int main()
-// {
-//     // CLEAR TERMINAL
-//     clear_screen();
-
-//     // GO TO START MENU
-//     start_menu();
-
-//     return 0;
-// }
-
 // pictures features
 PIC pictures[10000];
 
@@ -125,8 +114,7 @@ void main_menu()
         while (!(index > 0 && index <= 5000))
         {
 
-        cout << "Please input the index of number " 
-             << explor_num 
+        cout << "Please input the index number "  
              << "between 1 and 5000"
              << endl << endl
              << "-->  ";
@@ -181,8 +169,7 @@ void main_menu()
         while (!(index > 0 && index <= 800))
         {
 
-        cout << "Please input the index of number " 
-             << explor_num 
+        cout << "Please input the index number " 
              << "between 1 and 800"
              << endl << endl
              << "-->  ";
@@ -192,8 +179,8 @@ void main_menu()
         }
 
         // testing
-        cout << testing(test_num, index, pictures);
-        
+        cout << endl << testing(test_num, index, pictures);
+
         system("PAUSE");
         system("color 0F");
         clear_screen();
