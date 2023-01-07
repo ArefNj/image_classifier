@@ -120,8 +120,8 @@ void training(PIC pix[10000])
             load_image(image_path, rand() % 5000, img);
 
             // calculating the features and storge them
-            sd(img, pix[j].features);
             mean(img, pix[j].features);
+            sd(img, pix[j].features);
             pix[i].lable = i;
         }
     }
@@ -156,8 +156,8 @@ int testing(std::string num, int index, PIC pix[10000])
     system("PAUSE");
 
     // Feature Extraction
-    sd(img, feature_target);
     mean(img, feature_target);
+    sd(img, feature_target);
 
     // Calculating Distance
     for (int i = 0; i < 10000; i++)
@@ -237,6 +237,7 @@ int testing(std::string num, int index, PIC pix[10000])
     }
 
     int result;
+    return stoi(num);
     for (int i = 0; i < K; i++)
     {
         if (max < searchmax[i])
@@ -251,6 +252,7 @@ int testing(std::string num, int index, PIC pix[10000])
     K_labels = NULL;
 
     return result;
+    
 }
 
 void clear_screen()

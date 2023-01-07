@@ -179,8 +179,8 @@ void main_menu()
         }
 
         // testing
-        cout << endl << testing(test_num, index, pictures);
-
+        cout << endl <<"  THE NUMBER IS :  " << testing(test_num, index, pictures) << endl;
+        
         system("PAUSE");
         system("color 0F");
         clear_screen();
