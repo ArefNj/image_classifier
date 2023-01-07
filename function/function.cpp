@@ -106,7 +106,7 @@ void explor(std::string num, int index)
     }
 }
 
-void train(PIC pix[10])
+void train(PIC pix[10000])
 {
     std::string image_path;
     srand((unsigned)time(NULL));
@@ -115,13 +115,18 @@ void train(PIC pix[10])
 
     for (int i = 0; i < 10; i++)
     {
+        for (int j = i * 1000; j < (i * 1000) + 1000; j++)
+        {
         image_path = interpolation("data\\mnist", "train", to_string(i));
         load_image(image_path, rand() % 5000, img);
 
         // calculating the features and storge them
-        sd(img, pix[i].features);
-        mean(img, pix[i].features);
+        sd(img, pix[j].features);
+        mean(img, pix[j].features);
         pix[i].lable = i;
+            
+        }
+        
     }
 
     // TODO   acc
