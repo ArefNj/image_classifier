@@ -1,6 +1,5 @@
 #include "function.hpp"
 #include "..\\utils\\utils.hpp"
-#include "..\\utils\\timer.hpp"
 
 // measures of distance of two array by Euclidean distance
 float distance(float array1[], float array2[], int num_array)
