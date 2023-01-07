@@ -82,7 +82,6 @@ void mean(float matrix[28][28], float feature[32])
     }
 }
 
-
 void explor(std::string num)
 {
     std::string image_path = interpolation("data\\mnist", "train", num);
@@ -94,13 +93,13 @@ void explor(std::string num)
     {
         for (int j = 0; j < IMAGE_SIZE; j++)
         {
+            // print whitespace if value of pixel was 0, else print *
             if (img[i][j] == 0)
             {
                 std::cout << " ";
             }
             else
                 std::cout << "*";
-            
         }
         std::cout << std::endl;
     }
