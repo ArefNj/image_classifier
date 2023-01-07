@@ -107,13 +107,16 @@ void main_menu()
         
         clear_screen();
         system("color 0E");
-        while (stoi(explor_num) < 0 && stoi(explor_num) > 9)
+
+        while (!(stoi(explor_num) >= 0 && stoi(explor_num) <= 9))
         {
             cout << "Please choose your number between 0 and 9\n\n"
                  << "-->  ";
             cin >> explor_num;
             cout << endl << endl;
         }
+        clear_screen();
+        system("color 0B");
         explor(explor_num);
 
         system("PAUSE");
