@@ -82,12 +82,12 @@ void mean(float matrix[28][28], float feature[32])
     }
 }
 
-void explor(std::string num)
+void explor(std::string num, int index)
 {
     std::string image_path = interpolation("data\\mnist", "train", num);
     float img[IMAGE_SIZE][IMAGE_SIZE];
 
-    load_image(image_path, 100, img);
+    load_image(image_path, index, img);
     // print matrix image
     for (int i = 0; i < IMAGE_SIZE; i++)
     {
@@ -103,4 +103,24 @@ void explor(std::string num)
         }
         std::cout << std::endl;
     }
+}
+
+void train()
+{
+    std::string image_path;
+    PIC pix[10];
+    float img[IMAGE_SIZE][IMAGE_SIZE];
+
+    for (int i = 0; i < 10; i++)
+    {
+        image_path = interpolation("data\\mnist", "train", to_string(i));
+        load_image(image_path, 100, img);
+        // calculating the features and storge them
+        sd(img, pix[i].features);
+        mean(img, pix[i].features);
+        pix[i].lable = i;
+
+
+    }
+    
 }

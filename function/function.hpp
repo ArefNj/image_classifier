@@ -5,6 +5,13 @@
 
 using namespace std;
 
+struct PIC
+{
+    int lable;
+    float features[32];
+};
+
+
 
 
 // measures of distance of two array by Euclidean distance
@@ -19,4 +26,4 @@ void mean(float matrix[28][28], float feature[32]);
 // storage the std feature in feature array (need calculate mean first)[odd indexes]
 void sd(float matrix[28][28], float feature[32]);
 
-void explor(std::string num);
+void explor(std::string num, int index);
