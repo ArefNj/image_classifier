@@ -11,9 +11,6 @@ struct PIC
     float features[32];
 };
 
-
-
-
 // measures of distance of two array by Euclidean distance
 float distance(float array1[], float array2[], int num_array);
 
@@ -27,3 +24,5 @@ void mean(float matrix[28][28], float feature[32]);
 void sd(float matrix[28][28], float feature[32]);
 
 void explor(std::string num, int index);
+
+void train(PIC pix[10]);

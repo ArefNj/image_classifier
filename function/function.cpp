@@ -1,6 +1,7 @@
 #include "function.hpp"
 #include "..\\utils\\utils.hpp"
 
+
 // measures of distance of two array by Euclidean distance
 float distance(float array1[], float array2[], int num_array)
 {
@@ -81,7 +82,7 @@ void mean(float matrix[28][28], float feature[32])
         }
     }
 }
-
+// print index of number of your
 void explor(std::string num, int index)
 {
     std::string image_path = interpolation("data\\mnist", "train", num);
@@ -105,22 +106,24 @@ void explor(std::string num, int index)
     }
 }
 
-void train()
+void train(PIC pix[10])
 {
     std::string image_path;
-    PIC pix[10];
+    srand((unsigned)time(NULL));
+
     float img[IMAGE_SIZE][IMAGE_SIZE];
 
     for (int i = 0; i < 10; i++)
     {
         image_path = interpolation("data\\mnist", "train", to_string(i));
-        load_image(image_path, 100, img);
+        load_image(image_path, rand() % 5000, img);
+
         // calculating the features and storge them
         sd(img, pix[i].features);
         mean(img, pix[i].features);
         pix[i].lable = i;
-
-
     }
+
+    // TODO   acc
     
 }
