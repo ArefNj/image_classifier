@@ -1,4 +1,6 @@
 #include "function.hpp"
+#include "..\\utils\\utils.hpp"
+#include "..\\utils\\timer.hpp"
 
 // measures of distance of two array by Euclidean distance
 float distance(float array1[], float array2[], int num_array)
@@ -78,5 +80,29 @@ void mean(float matrix[28][28], float feature[32])
             // go next index
             feature_index += 2;
         }
+    }
+}
+
+
+void explor(std::string num)
+{
+    std::string image_path = interpolation("data\\mnist", "train", num);
+    float img[IMAGE_SIZE][IMAGE_SIZE];
+
+    load_image(image_path, 100, img);
+    // print matrix image
+    for (int i = 0; i < IMAGE_SIZE; i++)
+    {
+        for (int j = 0; j < IMAGE_SIZE; j++)
+        {
+            if (img[i][j] == 0)
+            {
+                std::cout << " ";
+            }
+            else
+                std::cout << "*";
+            
+        }
+        std::cout << std::endl;
     }
 }

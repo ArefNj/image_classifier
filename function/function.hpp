@@ -19,4 +19,4 @@ void mean(float matrix[28][28], float feature[32]);
 // storage the std feature in feature array (need calculate mean first)[odd indexes]
 void sd(float matrix[28][28], float feature[32]);
 
-
+void explor(std::string num);
