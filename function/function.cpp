@@ -83,6 +83,7 @@ void mean(float matrix[IMAGE_SIZE][IMAGE_SIZE], float feature[FEATURE_ARRAY_SIZE
         }
     }
 }
+
 // print index of number of your
 void exploring(std::string num, int index, std::string place)
 {
@@ -107,6 +108,7 @@ void exploring(std::string num, int index, std::string place)
     }
 }
 
+// feature Extraction of pictures
 void training(PIC pix[PICTURES_NUMBER])
 {
     std::string image_path;
@@ -132,6 +134,7 @@ void training(PIC pix[PICTURES_NUMBER])
     // TODO   acc
 }
 
+// finding the num of picture
 int testing(std::string num, int index, PIC pix[PICTURES_NUMBER], bool ask_for_K)
 {
     // Init Vars And Loading Image
@@ -151,20 +154,21 @@ int testing(std::string num, int index, PIC pix[PICTURES_NUMBER], bool ask_for_K
     // init K and K labels dynamic array
     int *K_labels = NULL;
     int K = 0;
+
+    // ASK FOR K IF WE ARE IN TEST SECTION
     if (ask_for_K)
     {
         while (!(K % 2 == 1 && K > 1))
         {
             cout << "Please input the your K for KNN algoritm\n"
-                << "(It should be an Odd number and bigger than 2)\n\n"
-                << "-->  ";
+                 << "(It should be an Odd number and bigger than 2)\n\n"
+                 << "-->  ";
             cin >> K;
             clear_screen();
         }
     }
     else
         K = 101;
-    
 
     // SERCHING KNN
     K_labels = new int[K];
@@ -294,6 +298,7 @@ int testing(std::string num, int index, PIC pix[PICTURES_NUMBER], bool ask_for_K
     return result;
 }
 
+// find accuracy of KNN algoritm and print it
 void accuracy(PIC pix[PICTURES_NUMBER], bool ask_for_K)
 {
     srand((unsigned)time(NULL));
@@ -313,13 +318,12 @@ void accuracy(PIC pix[PICTURES_NUMBER], bool ask_for_K)
 
         if (num == checker)
             rights++;
-
-
     }
 
     cout << "\naccuracy :" << rights << "%\n";
 }
 
+// clear the screen for going from a section to another section
 void clear_screen()
 {
 #ifdef _WIN32

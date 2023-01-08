@@ -8,17 +8,14 @@
 #include <cmath>
 #include <iomanip>
 
-
 using namespace std;
 
 struct PIC
 {
-    int lable;
-    float features[FEATURE_ARRAY_SIZE];
-    float distance;
+    int lable;                          // lable num = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
+    float features[FEATURE_ARRAY_SIZE]; // features[oddindex = sd, evenindex = mean]
+    float distance;                     // distance of features array from the target
 };
-
-
 
 void clear_screen();
 
@@ -34,10 +31,14 @@ void mean(float matrix[IMAGE_SIZE][IMAGE_SIZE], float feature[FEATURE_ARRAY_SIZE
 // storage the std feature in feature array (need calculate mean first)[odd indexes]
 void sd(float matrix[IMAGE_SIZE][IMAGE_SIZE], float feature[FEATURE_ARRAY_SIZE]);
 
+// Print the desired photo(Num of picture, Index of picture, Address)
 void exploring(std::string num, int index, std::string place);
 
+// feature Extraction of pictures
 void training(PIC pix[PICTURES_NUMBER]);
 
+// finding the num of picture
 int testing(std::string num, int index, PIC pix[PICTURES_NUMBER], bool ask_for_K);
 
+// find accuracy of KNN algoritm and print it
 void accuracy(PIC pix[PICTURES_NUMBER], bool ask_for_K);
