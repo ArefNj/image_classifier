@@ -91,6 +91,7 @@ void main_menu()
     // INIT SWITCH KEY
     int switch_key;
     int index = -1;
+    int result;
     cin >> switch_key;
     string explor_num = "-1";
     string test_num = "-1";
@@ -179,7 +180,9 @@ void main_menu()
         }
 
         // testing
-        cout << endl <<"  THE NUMBER IS :  " << testing(test_num, index, pictures) << endl;
+        result = testing(test_num, index, pictures);
+
+        cout <<"||  THE NUMBER IS :  " << result << "  ||\n";
         
         system("PAUSE");
         system("color 0F");
