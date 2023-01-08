@@ -18,19 +18,19 @@ void destance_matrix_from_patern(float matrix[][100], float pattern[], float sto
 {
     for (int i = 0; i < row; i++)
     {
-        storag[i] = distance(matrix[i], pattern, 28);
+        storag[i] = distance(matrix[i], pattern, IMAGE_SIZE);
     }
 }
 
 // storage the std feature in feature array (need calculate mean first)[odd indexes]
-void sd(float matrix[28][28], float feature[32])
+void sd(float matrix[IMAGE_SIZE][IMAGE_SIZE], float feature[FEATURE_ARRAY_SIZE])
 {
     float sum;
     int feature_index = 1;
 
-    for (int j = 0; j < 28; j += 7) // y limiter
+    for (int j = 0; j < IMAGE_SIZE; j += 7) // y limiter
     {
-        for (int i = 0; i < 28; i += 7) // x limiter
+        for (int i = 0; i < IMAGE_SIZE; i += 7) // x limiter
         {
             // reset sum for next block
             sum = 0;
@@ -54,14 +54,14 @@ void sd(float matrix[28][28], float feature[32])
 }
 
 // storage the mean feature in even indexes in feature array [even indexes]
-void mean(float matrix[28][28], float feature[32])
+void mean(float matrix[IMAGE_SIZE][IMAGE_SIZE], float feature[FEATURE_ARRAY_SIZE])
 {
     float sum;
     int feature_index = 0;
 
-    for (int j = 0; j < 28; j += 7) // y limiter
+    for (int j = 0; j < IMAGE_SIZE; j += 7) // y limiter
     {
-        for (int i = 0; i < 28; i += 7) // x limiter
+        for (int i = 0; i < IMAGE_SIZE; i += 7) // x limiter
         {
             // reset sum for next block
             sum = 0;
@@ -107,7 +107,7 @@ void exploring(std::string num, int index, std::string place)
     }
 }
 
-void training(PIC pix[10000])
+void training(PIC pix[PICTURES_NUMBER])
 {
     std::string image_path;
     srand((unsigned)time(NULL));
@@ -132,60 +132,48 @@ void training(PIC pix[10000])
     // TODO   acc
 }
 
-int testing(std::string num, int index, PIC pix[10000])
+int testing(std::string num, int index, PIC pix[PICTURES_NUMBER], bool ask_for_K)
 {
-    // init vars and Loading Image
+    // Init Vars And Loading Image
     std::string image_path = interpolation("data\\mnist", "test", num);
     float img[IMAGE_SIZE][IMAGE_SIZE];
     PIC target;
-
     load_image(image_path, index, img);
-
-    // PRINTING IMAGE
-    for (int i = 0; i < IMAGE_SIZE; i++)
-    {
-        for (int j = 0; j < IMAGE_SIZE; j++)
-        {
-            // print whitespace if value of pixel was 0, else print *
-            if (img[i][j] == 0)
-            {
-                std::cout << " ";
-            }
-            else
-                std::cout << "*";
-        }
-        std::cout << std::endl;
-    }
-    cout << endl;
-    system("PAUSE");
-    clear_screen();
 
     // Feature Extraction
     mean(img, target.features);
     sd(img, target.features);
 
     // Calculating Distance
-    for (int i = 0; i < 10000; i++)
-        pix[i].distance = distance(target.features, pix[i].features, 32);
+    for (int i = 0; i < PICTURES_NUMBER; i++)
+        pix[i].distance = distance(target.features, pix[i].features, FEATURE_ARRAY_SIZE);
 
     // init K and K labels dynamic array
     int *K_labels = NULL;
     int K = 0;
-    while (!(K % 2 == 1 && K > 1))
+    if (ask_for_K)
     {
-        cout << "Please input the your K for KNN algoritm\n(It should be an Odd number and bigger than 2)\n\n"
-             << "-->  ";
-        cin >> K;
-        clear_screen();
+        while (!(K % 2 == 1 && K > 1))
+        {
+            cout << "Please input the your K for KNN algoritm\n"
+                << "(It should be an Odd number and bigger than 2)\n\n"
+                << "-->  ";
+            cin >> K;
+            clear_screen();
+        }
     }
-    K_labels = new int[K];
+    else
+        K = 101;
+    
 
     // SERCHING KNN
+    K_labels = new int[K];
     float min = 100000;
     int min_label, counter = 1, max = 0;
     float limiter = 0;
+
     // finding nearest K and max
-    for (int i = 0; i < 10000; i++)
+    for (int i = 0; i < PICTURES_NUMBER; i++)
     {
         if (pix[i].distance < min)
         {
@@ -203,7 +191,7 @@ int testing(std::string num, int index, PIC pix[10000])
     {
         min = max;
         // search for secend[third...] neighbors
-        for (int i = 0; i < 10000; i++)
+        for (int i = 0; i < PICTURES_NUMBER; i++)
         {
             if (pix[i].distance < min && pix[i].distance > limiter)
             {
@@ -230,7 +218,7 @@ int testing(std::string num, int index, PIC pix[10000])
     int result;
     max = 0;
 
-    //  counter how times call out a number
+    // COUNT HOW MENY TIMES CALL OUT A NUMBER
     for (int i = 0; i < K; i++)
     {
         switch (K_labels[i])
@@ -287,7 +275,7 @@ int testing(std::string num, int index, PIC pix[10000])
     // }
     // cout << "\n";
 
-    // looking for result
+    // LOOKING FOR RESULT
     for (int i = 0; i < 10; i++)
     {
         if (max < searchmax[i])
@@ -299,10 +287,37 @@ int testing(std::string num, int index, PIC pix[10000])
 
     delete[] K_labels;
     K_labels = NULL;
+
     // ALTERNATIVE WAY :)
     // return stoi(num);
 
     return result;
+}
+
+void accuracy(PIC pix[PICTURES_NUMBER], bool ask_for_K)
+{
+    srand((unsigned)time(NULL));
+    int checker;
+    int rights = 0;
+    PIC target;
+    for (int i = 0; i < 100; i++)
+    {
+        int num = rand() % 10;
+        int index = rand() % 5000;
+
+        checker = testing(to_string(num), index, pix, false);
+
+        // cout << "num :" << num << "  checker :" << checker;
+
+        // Feature Extraction
+
+        if (num == checker)
+            rights++;
+
+
+    }
+
+    cout << "\naccuracy :" << rights << "%\n";
 }
 
 void clear_screen()
