@@ -21,6 +21,7 @@ void start_menu()
     int switch_key;
     cin >> switch_key;
 
+    // START MENU
     switch (switch_key)
     {
     case 1: // IF SWITCH KEY == 1 : GO TO MAIN MENU
@@ -96,11 +97,11 @@ void main_menu()
     string explor_num = "-1";
     string test_num = "-1";
 
-
+    // MAIN MENU
     switch (switch_key)
     {
     case 1: // IF SWITCH KEY == 1 : GO TO EXPLORING SECTION
-        
+
         clear_screen();
         system("color 0E");
 
@@ -109,19 +110,22 @@ void main_menu()
             cout << "Please choose your number between 0 and 9\n\n"
                  << "-->  ";
             cin >> explor_num;
-            cout << endl << endl;
+            cout << endl
+                 << endl;
         }
         clear_screen();
         while (!(index > 0 && index <= 5000))
         {
 
-        cout << "Please input the index number "  
-             << "between 1 and 5000"
-             << endl << endl
-             << "-->  ";
-             cin >> index;
-             cout << endl << endl;
-             clear_screen();
+            cout << "Please input the index number "
+                 << "between 1 and 5000"
+                 << endl
+                 << endl
+                 << "-->  ";
+            cin >> index;
+            cout << endl
+                 << endl;
+            clear_screen();
         }
 
         system("color 0B");
@@ -139,12 +143,10 @@ void main_menu()
         clear_screen();
         system("color 0E");
 
-        
         cout << "Training...\n\n";
         training(pictures);
 
-        accuracy(pictures,false);
-        
+        accuracy(pictures, false);
 
         system("PAUSE");
         system("color 0F");
@@ -157,14 +159,15 @@ void main_menu()
     case 3: // IF SWITCH KEY == 3 : GO TO TEST SECTION
         clear_screen();
         system("color 0E");
-        
+
         // get test num
         while (!(stoi(test_num) >= 0 && stoi(test_num) <= 9))
         {
             cout << "Please choose your number between 0 and 9\n\n"
                  << "-->  ";
             cin >> test_num;
-            cout << endl << endl;
+            cout << endl
+                 << endl;
         }
         clear_screen();
 
@@ -172,13 +175,15 @@ void main_menu()
         while (!(index > 0 && index <= 800))
         {
 
-        cout << "Please input the index number " 
-             << "between 1 and 800"
-             << endl << endl
-             << "-->  ";
-             cin >> index;
-             cout << endl << endl;
-             clear_screen();
+            cout << "Please input the index number "
+                 << "between 1 and 800"
+                 << endl
+                 << endl
+                 << "-->  ";
+            cin >> index;
+            cout << endl
+                 << endl;
+            clear_screen();
         }
         // printing
         exploring(test_num, index, "test");
@@ -189,8 +194,8 @@ void main_menu()
         // testing
         result = testing(test_num, index, pictures, true);
 
-        cout <<"||  THE NUMBER IS :  " << result << "  ||\n";
-        
+        cout << "||  THE NUMBER IS :  " << result << "  ||\n";
+
         system("PAUSE");
         system("color 0F");
         clear_screen();
@@ -219,4 +224,3 @@ void main_menu()
         break;
     }
 }
-
