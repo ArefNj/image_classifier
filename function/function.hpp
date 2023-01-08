@@ -1,17 +1,24 @@
 #pragma once
 
+#define FEATURE_ARRAY_SIZE 25
+#define PICTURES_NUMBER 10000
+#define IMAGE_SIZE 28
+
 #include <iostream>
 #include <cmath>
 #include <iomanip>
+
 
 using namespace std;
 
 struct PIC
 {
     int lable;
-    float features[32];
+    float features[FEATURE_ARRAY_SIZE];
     float distance;
 };
+
+
 
 void clear_screen();
 
@@ -22,13 +29,15 @@ float distance(float array1[], float array2[], int num_array);
 void destance_matrix_from_patern(float matrix[][100], float pattern[], float storag[], int row);
 
 // storage the mean feature in even indexes in feature array [even indexes]
-void mean(float matrix[28][28], float feature[32]);
+void mean(float matrix[IMAGE_SIZE][IMAGE_SIZE], float feature[FEATURE_ARRAY_SIZE]);
 
 // storage the std feature in feature array (need calculate mean first)[odd indexes]
-void sd(float matrix[28][28], float feature[32]);
+void sd(float matrix[IMAGE_SIZE][IMAGE_SIZE], float feature[FEATURE_ARRAY_SIZE]);
 
 void exploring(std::string num, int index, std::string place);
 
-void training(PIC pix[100000]);
+void training(PIC pix[PICTURES_NUMBER]);
 
-int testing(std::string num, int index, PIC pix[10000]);
+int testing(std::string num, int index, PIC pix[PICTURES_NUMBER], bool ask_for_K);
+
+void accuracy(PIC pix[PICTURES_NUMBER], bool ask_for_K);

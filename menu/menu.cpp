@@ -2,7 +2,7 @@
 #include "..\\function\\function.hpp"
 
 // pictures features
-PIC pictures[10000];
+PIC pictures[PICTURES_NUMBER];
 
 void start_menu()
 {
@@ -142,6 +142,8 @@ void main_menu()
         
         cout << "Training...\n\n";
         training(pictures);
+
+        accuracy(pictures,false);
         
 
         system("PAUSE");
@@ -178,9 +180,14 @@ void main_menu()
              cout << endl << endl;
              clear_screen();
         }
+        // printing
+        exploring(test_num, index, "test");
+        cout << endl;
+        system("PAUSE");
+        clear_screen();
 
         // testing
-        result = testing(test_num, index, pictures);
+        result = testing(test_num, index, pictures, true);
 
         cout <<"||  THE NUMBER IS :  " << result << "  ||\n";
         
