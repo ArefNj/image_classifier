@@ -44,7 +44,8 @@ void sd(float matrix[28][28], float feature[32])
             }
 
             // storage in feature
-            feature[feature_index] = sqrt(sum / 48);
+
+            feature[feature_index] = floor((sqrt(sum / 48)) * 1000 + 0.5) / 1000;
 
             // go next index
             feature_index += 2;
@@ -74,7 +75,8 @@ void mean(float matrix[28][28], float feature[32])
             }
 
             // storage in feature
-            feature[feature_index] = sum / 49;
+
+            feature[feature_index] = floor((sum / 49) * 1000 + 0.5) / 1000;
 
             // go next index
             feature_index += 2;
@@ -122,7 +124,8 @@ void training(PIC pix[10000])
             // calculating the features and storge them
             mean(img, pix[j].features);
             sd(img, pix[j].features);
-            pix[i].lable = i;
+
+            pix[j].lable = i;
         }
     }
 
@@ -134,7 +137,8 @@ int testing(std::string num, int index, PIC pix[10000])
     // init vars and Loading Image
     std::string image_path = interpolation("data\\mnist", "test", num);
     float img[IMAGE_SIZE][IMAGE_SIZE];
-    float feature_target[32];
+    PIC target;
+
     load_image(image_path, index, img);
 
     // PRINTING IMAGE
@@ -154,19 +158,20 @@ int testing(std::string num, int index, PIC pix[10000])
     }
     cout << endl;
     system("PAUSE");
+    clear_screen();
 
     // Feature Extraction
-    mean(img, feature_target);
-    sd(img, feature_target);
+    mean(img, target.features);
+    sd(img, target.features);
 
     // Calculating Distance
     for (int i = 0; i < 10000; i++)
-        pix[i].distance = distance(feature_target, pix[i].features);
+        pix[i].distance = distance(target.features, pix[i].features, 32);
 
     // init K and K labels dynamic array
     int *K_labels = NULL;
     int K = 0;
-    while (K % 2 == 0 && K > 2)
+    while (!(K % 2 == 1 && K > 1))
     {
         cout << "Please input the your K for KNN algoritm\n(It should be an Odd number and bigger than 2)\n\n"
              << "-->  ";
@@ -176,29 +181,56 @@ int testing(std::string num, int index, PIC pix[10000])
     K_labels = new int[K];
 
     // SERCHING KNN
-    float min = pix[0].distance;
-    int min_label, counter = 0, max = 0;
+    float min = 100000;
+    int min_label, counter = 1, max = 0;
     float limiter = 0;
-    while (counter <= K)
+    // finding nearest K and max
+    for (int i = 0; i < 10000; i++)
     {
+        if (pix[i].distance < min)
+        {
+            min = pix[i].distance;
+
+            K_labels[0] = pix[i].lable;
+        }
+        if (pix[i].distance > max)
+            max = pix[i].distance;
+    }
+
+    // search for Neighbors
+    limiter = min;
+    while (counter < K)
+    {
+        min = max;
+        // search for secend[third...] neighbors
         for (int i = 0; i < 10000; i++)
         {
-            if (pix[i].distance <= min && pix[i].distance > limiter)
+            if (pix[i].distance < min && pix[i].distance > limiter)
             {
                 min = pix[i].distance;
                 min_label = pix[i].lable;
             }
-            if (pix[i].distance > max)
-                max = pix[i].distance;
         }
+
+        // set vars and storge the min label
         K_labels[counter] = min_label;
         limiter = min;
-        min = max;
         counter++;
     }
+
+    // cout << "PRINT KNN LABELS\n"
+    // for (int i = 0; i < K; i++)
+    // {
+    //     cout << K_labels[i] << "\t";
+    // }
+    // system("PAUSE");
+
     // SEARCHING FOR MAX CALL OUT
-    int searchmax[10] = {0};
+    long long searchmax[10] = {0};
+    int result;
     max = 0;
+
+    //  counter how times call out a number
     for (int i = 0; i < K; i++)
     {
         switch (K_labels[i])
@@ -206,39 +238,57 @@ int testing(std::string num, int index, PIC pix[10000])
         case 0:
             searchmax[0]++;
             break;
+
         case 1:
             searchmax[1]++;
             break;
+
         case 2:
             searchmax[2]++;
             break;
+
         case 3:
             searchmax[3]++;
             break;
+
         case 4:
             searchmax[4]++;
             break;
+
         case 5:
             searchmax[5]++;
             break;
+
         case 6:
             searchmax[6]++;
             break;
+
         case 7:
             searchmax[7]++;
             break;
+
         case 8:
             searchmax[8]++;
             break;
+
         case 9:
             searchmax[9]++;
+            break;
+
+        default:
             break;
         }
     }
 
-    int result;
-    return stoi(num);
-    for (int i = 0; i < K; i++)
+    // cout << "COUNTING RESULT\n"
+    // for (int i = 0; i < 10; i++)
+    // {
+    //     cout << searchmax[i] << "\t";
+    // }
+    // cout << "\n";
+
+    // looking for result
+    for (int i = 0; i < 10; i++)
     {
         if (max < searchmax[i])
         {
@@ -247,12 +297,12 @@ int testing(std::string num, int index, PIC pix[10000])
         }
     }
 
-
     delete[] K_labels;
     K_labels = NULL;
+    // ALTERNATIVE WAY :)
+    // return stoi(num);
 
     return result;
-    
 }
 
 void clear_screen()
