@@ -104,7 +104,7 @@ void main_menu()
 
         clear_screen();
         system("color 0E");
-
+        // Check Inputs
         while (!(stoi(explor_num) >= 0 && stoi(explor_num) <= 9))
         {
             cout << "Please choose your number between 0 and 9\n\n"

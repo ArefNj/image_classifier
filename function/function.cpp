@@ -131,7 +131,6 @@ void training(PIC pix[PICTURES_NUMBER])
         }
     }
 
-    // TODO   acc
 }
 
 // finding the num of picture
@@ -168,7 +167,7 @@ int testing(std::string num, int index, PIC pix[PICTURES_NUMBER], bool ask_for_K
         }
     }
     else
-        K = 101;
+        K = 10;
 
     // SERCHING KNN
     K_labels = new int[K];
@@ -305,7 +304,7 @@ void accuracy(PIC pix[PICTURES_NUMBER], bool ask_for_K)
     int checker;
     int rights = 0;
     PIC target;
-    for (int i = 0; i < 100; i++)
+    for (int i = 0; i < 10; i++)
     {
         int num = rand() % 10;
         int index = rand() % 5000;
@@ -320,7 +319,7 @@ void accuracy(PIC pix[PICTURES_NUMBER], bool ask_for_K)
             rights++;
     }
 
-    cout << "\naccuracy :" << rights << "%\n";
+    cout << "\naccuracy :" << rights * 10 << "%\n";
 }
 
 // clear the screen for going from a section to another section
