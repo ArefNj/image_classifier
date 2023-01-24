@@ -271,7 +271,7 @@ int testing(std::string num, int index, PIC pix[PICTURES_NUMBER], bool ask_for_K
         }
     }
 
-    // cout << "COUNTING RESULT\n"
+    // cout << "COUNTING RESULT\n";
     // for (int i = 0; i < 10; i++)
     // {
     //     cout << searchmax[i] << "\t";
